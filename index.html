@@ -475,7 +475,7 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') closeMap(); }
 // 详情展开/收起
 function toggleDetail(btn) {
   btn.classList.toggle('open');
-  const box = btn.parentElement.querySelector('.detail-box');
+  const box = btn.closest('.tl-card').querySelector('.detail-box');
   if (box) box.classList.toggle('open');
 }
 
@@ -510,8 +510,12 @@ function mdDetail(t){
     line = line.trim();
     if (!line) return '';
     // @@标题|链接@@ → 笔记卡片
-    if (/@@(.+?)\|(.+?)@@/.test(line)) {
-      return line.replace(/@@(.+?)\|(.+?)@@/g, function(_, title, url) {
+    if (/@@(.+?)@@/.test(line)) {
+      return line.replace(/@@(.+?)@@/g, function(_, inner) {
+        const sep = inner.lastIndexOf('|');
+        if (sep === -1) return inner;
+        const title = inner.substring(0, sep);
+        const url = inner.substring(sep + 1);
         const src = getLinkSource(url);
         return '<a class="xhs-card" href="' + url + '" target="_blank" rel="noopener">'
           + '<div class="xhs-icon" style="background:linear-gradient(135deg,' + src.color + ',' + src.color + 'cc)">' + src.icon + '</div>'
