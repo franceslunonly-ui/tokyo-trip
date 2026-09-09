@@ -82,6 +82,20 @@
   .xhs-card .xhs-source{font-size:.68em;color:var(--ink-light);margin-top:2px}
   .xhs-card .xhs-arrow{color:#ccc;font-size:.9em;flex-shrink:0}
 
+  /* ===== 小红书提示弹窗 ===== */
+  .xhs-toast{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.45);z-index:10000;justify-content:center;align-items:center;backdrop-filter:blur(3px)}
+  .xhs-toast.open{display:flex}
+  .xhs-toast-box{background:#fff;border-radius:16px;padding:24px 20px;max-width:340px;width:90%;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,.2);animation:fadeIn .2s ease}
+  .xhs-toast-box .xhs-t-icon{font-size:36px;margin-bottom:10px}
+  .xhs-toast-box .xhs-t-title{font-size:.95em;font-weight:700;margin-bottom:6px;line-height:1.4;color:var(--ink)}
+  .xhs-toast-box .xhs-t-desc{font-size:.78em;color:var(--ink-light);margin-bottom:16px;line-height:1.5}
+  .xhs-toast-box .xhs-t-btns{display:flex;gap:8px}
+  .xhs-toast-box .xhs-t-btn{flex:1;padding:10px 0;border-radius:10px;border:none;font-size:.85em;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent}
+  .xhs-toast-box .xhs-t-copy{background:linear-gradient(135deg,#FF4458,#FF2442);color:#fff}
+  .xhs-toast-box .xhs-t-copy:active{opacity:.85}
+  .xhs-toast-box .xhs-t-cancel{background:#f5f5f5;color:var(--ink-light)}
+  .xhs-toast-box .xhs-t-ok{display:none;color:#5BA37A;font-size:.82em;font-weight:600;margin-top:10px}
+
   /* ===== 地图弹窗 ===== */
   .map-link{color:var(--cherry);text-decoration:none;border-bottom:2px solid var(--cherry);cursor:pointer;font-weight:600;transition:all .2s;-webkit-tap-highlight-color:transparent}
   .map-link:active{background:var(--cherry-light);border-radius:2px}
@@ -155,6 +169,20 @@
 <div id="app"></div>
 
 <!-- 地图弹窗容器 -->
+<!-- 小红书提示弹窗 -->
+<div class="xhs-toast" id="xhsToast" onclick="if(event.target===this)closeXhs()">
+  <div class="xhs-toast-box">
+    <div class="xhs-t-icon">📕</div>
+    <div class="xhs-t-title" id="xhsTitle"></div>
+    <div class="xhs-t-desc">小红书不支持外部网页跳转，请复制标题到小红书 App 搜索</div>
+    <div class="xhs-t-btns">
+      <button class="xhs-t-btn xhs-t-cancel" onclick="closeXhs()">关闭</button>
+      <button class="xhs-t-btn xhs-t-copy" onclick="copyXhs()">📋 复制标题</button>
+    </div>
+    <div class="xhs-t-ok" id="xhsOk">✅ 已复制，去小红书搜索吧！</div>
+  </div>
+</div>
+
 <div class="map-overlay" id="mapOverlay" onclick="if(event.target===this)closeMap()">
   <div class="map-panel">
     <div class="map-panel-header">
@@ -481,6 +509,32 @@ function toggleDetail(btn) {
 
 // 文本解析
 // 解析 @@标题|链接@@ 为小红书卡片
+// 小红书弹窗
+let _xhsTitle = '';
+function openXhs(title) {
+  _xhsTitle = title;
+  document.getElementById('xhsTitle').textContent = title;
+  document.getElementById('xhsOk').style.display = 'none';
+  document.getElementById('xhsToast').classList.add('open');
+}
+function closeXhs() {
+  document.getElementById('xhsToast').classList.remove('open');
+}
+function copyXhs() {
+  navigator.clipboard.writeText(_xhsTitle).then(() => {
+    document.getElementById('xhsOk').style.display = 'block';
+  }).catch(() => {
+    // 备用复制方法
+    const ta = document.createElement('textarea');
+    ta.value = _xhsTitle;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    document.getElementById('xhsOk').style.display = 'block';
+  });
+}
+
 function parseCards(t) {
   if(!t) return t;
   return t.replace(/@@(.+?)@@/g, function(_, inner) {
@@ -489,8 +543,13 @@ function parseCards(t) {
     const title = inner.substring(0, sep);
     const url = inner.substring(sep + 1);
     const src = getLinkSource(url);
-    const safeUrl = url.replace(/'/g, "\\'"  ).replace(/"/g, '&quot;');
-    return '<div class="xhs-card" onclick="window.open(\'' + safeUrl + '\',\'_blank\')">' 
+    const safeTitle = title.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    const safeUrl = url.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    // 小红书链接 → 弹窗复制标题，其他链接 → 直接跳转
+    const action = /xiaohongshu|xhslink/i.test(url)
+      ? 'openXhs(\'' + safeTitle + '\')'
+      : 'window.open(\'' + safeUrl + '\',\'_blank\')';
+    return '<div class="xhs-card" onclick="' + action + '">'
       + '<div class="xhs-icon" style="background:linear-gradient(135deg,' + src.color + ',' + src.color + 'cc)">' + src.icon + '</div>'
       + '<div class="xhs-info"><div class="xhs-title">' + title + '</div><div class="xhs-source">' + src.name + ' · 点击查看</div></div>'
       + '<span class="xhs-arrow">›</span></div>';
