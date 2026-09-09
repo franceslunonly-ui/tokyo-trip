@@ -511,26 +511,14 @@ var _xhsUrl = '';
 function openXhs(title, url) {
   _xhsTitle = title;
   _xhsUrl = url;
-  // 提取笔记ID，尝试用 deeplink 调起小红书App
-  var noteId = url.match(/(?:explore|item|discovery\/item)\/([a-f0-9]+)/i);
-  if (noteId) {
-    var deeplink = 'xhslink://noteDetail/' + noteId[1];
-    var t0 = Date.now();
-    window.location.href = deeplink;
-    // 如果500ms后还在页面上，说明App没打开，弹出复制弹窗
-    setTimeout(function() {
-      if (Date.now() - t0 < 1500) {
-        showXhsToast(title);
-      }
-    }, 500);
-  } else {
-    showXhsToast(title);
-  }
-}
-function showXhsToast(title) {
-  document.getElementById('xhsTitle').textContent = title;
-  document.getElementById('xhsOk').style.display = 'none';
-  document.getElementById('xhsToast').classList.add('open');
+  // 模拟真实链接点击，绕过浏览器弹窗拦截
+  var a = document.createElement('a');
+  a.href = url;
+  a.target = '_blank';
+  a.rel = 'noopener noreferrer';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 }
 function closeXhs() { document.getElementById('xhsToast').classList.remove('open'); }
 function copyXhs() {
