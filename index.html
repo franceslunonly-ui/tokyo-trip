@@ -260,7 +260,7 @@ const DATA = {
           time: "07:45ish",
           title: "在 **Gotanda Station** 坐 **山手线** 到 **原宿駅** ，步行4分钟到 **明治神宫前駅** ，换乘 **千代田线** 到 **代代木公园駅** ",
           food: "🥐 早餐｜步行2分钟到 {{365 Days|365 Days Yoyogi Hachiman Tokyo}} 买面包 / 步行5分钟到 {{Fuglen Tokyo|Fuglen Tokyo}} 喝咖啡 ☕",
-          detail: "🥖 **365 Days**\n东京超人气面包店，招牌是牛角包和吐司\n@@东京代代木🥖｜也是吃到了超人气面包百名店【365日】|https://www.xiaohongshu.com/explore/68202484000000000c03830c?xsec_token=ABVrGUReXAJ5zlV48yA2f7EAQfgHg4LXPn8LzvCknFHFY=&xsec_source=pc_search&source=web_explore_feed@@\n\n☕ **Fuglen Tokyo**\n来自挪威的精品咖啡，代代木公园旁的网红店——路过不排队来一杯"
+          note: "🥖 **365 Days** — 东京超人气面包店，招牌是牛角包和吐司\n@@东京代代木🥖｜也是吃到了超人气面包百名店【365日】|https://www.xiaohongshu.com/explore/68202484000000000c03830c?xsec_token=ABVrGUReXAJ5zlV48yA2f7EAQfgHg4LXPn8LzvCknFHFY=&xsec_source=pc_search&source=web_explore_feed@@\n☕ **Fuglen Tokyo** — 来自挪威的精品咖啡，代代木公园旁的网红店——路过不排队来一杯"
         },
         {
           time: "08:15ish",
@@ -480,6 +480,22 @@ function toggleDetail(btn) {
 }
 
 // 文本解析
+// 解析 @@标题|链接@@ 为小红书卡片
+function parseCards(t) {
+  if(!t) return t;
+  return t.replace(/@@(.+?)@@/g, function(_, inner) {
+    const sep = inner.lastIndexOf('|');
+    if (sep === -1) return inner;
+    const title = inner.substring(0, sep);
+    const url = inner.substring(sep + 1);
+    const src = getLinkSource(url);
+    return '<a class="xhs-card" href="' + url + '" target="_blank" rel="noopener">'
+      + '<div class="xhs-icon" style="background:linear-gradient(135deg,' + src.color + ',' + src.color + 'cc)">' + src.icon + '</div>'
+      + '<div class="xhs-info"><div class="xhs-title">' + title + '</div><div class="xhs-source">' + src.name + ' · 点击查看</div></div>'
+      + '<span class="xhs-arrow">›</span></a>';
+  });
+}
+
 function md(t){
   if(!t) return '';
   return t
@@ -555,8 +571,8 @@ function render(D){
       // detail 内容
       if(it.detail) h+=`<div class="detail-box">${mdDetail(it.detail)}</div>`;
       if(it.spots&&it.spots.length){h+=`<div class="spots">`;it.spots.forEach((s,j)=>{if(j)h+=`<span class="ar">→</span>`;h+=`<span class="s">${s}</span>`});h+=`</div>`}
-      if(it.note) h+=`<div class="note">${md(it.note.replace(/\//g,'<br>'))}</div>`;
-      if(it.food){const p=it.food.split('｜');h+=`<div class="food">${p[0]?'<div class="fl">'+p[0]+'</div>':''}${md((p[1]||'').replace(/\//g,'<br>'))}</div>`}
+      if(it.note) h+=`<div class="note">${parseCards(md(it.note.replace(/\//g,'<br>')))}</div>`;
+      if(it.food){const p=it.food.split('｜');h+=`<div class="food">${p[0]?'<div class="fl">'+p[0]+'</div>':''}${parseCards(md((p[1]||'').replace(/\//g,'<br>')))}</div>`}
       h+=`</div></div>`;
     });
     h+=`</div></div>`;
