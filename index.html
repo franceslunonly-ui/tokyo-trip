@@ -511,9 +511,14 @@ var _xhsUrl = '';
 function openXhs(title, url) {
   _xhsTitle = title;
   _xhsUrl = url;
-  document.getElementById('xhsTitle').textContent = title;
-  document.getElementById('xhsOk').style.display = 'none';
-  document.getElementById('xhsToast').classList.add('open');
+  // 直接浏览器打开短链接，页面会显示「打开App查看」按钮
+  var a = document.createElement('a');
+  a.href = url;
+  a.target = '_blank';
+  a.rel = 'noopener noreferrer';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
 }
 function closeXhs() { document.getElementById('xhsToast').classList.remove('open'); }
 function copyXhs() {
