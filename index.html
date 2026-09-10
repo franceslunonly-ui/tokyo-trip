@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -28,7 +28,7 @@
   .checklist li:last-child{border-bottom:none}
   .checklist li::before{content:'☐';font-size:1em;flex-shrink:0}
   .checklist li.checked::before{content:'☑';color:#5BA37A}
-  .checklist a{color:#4A90D9;text-decoration:none;border-bottom:1px dotted #4A90D9}
+  .checklist a{color:#4A90D9;text-decoration:none;border-bottom:1px dotted #4A90D9;white-space:nowrap}
 
   /* Day Nav - 手机优化 */
   .day-nav{display:flex;gap:6px;justify-content:center;padding:10px 8px;position:sticky;top:0;z-index:100;background:rgba(250,250,248,.92);backdrop-filter:blur(12px);max-width:832px;margin:0 auto;flex-wrap:wrap}
@@ -74,7 +74,7 @@
   @keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
   .detail-box img{width:100%;border-radius:8px;margin:8px 0 4px;display:block;box-shadow:0 2px 8px rgba(0,0,0,.1)}
   .detail-box p{margin:4px 0}
-  .xhs-card{display:flex;align-items:center;gap:10px;margin:8px 0;padding:10px 14px;border-radius:10px;background:#fff;border:1px solid #FFE0E0;cursor:pointer;text-decoration:none;color:var(--ink);transition:all .2s;-webkit-tap-highlight-color:transparent}
+  .xhs-card{display:flex;align-items:center;gap:10px;margin:8px 0;padding:10px 14px;border-radius:10px;background:#FFF5F5;border:1px solid #FFCECE;cursor:pointer;text-decoration:none;color:var(--ink);transition:all .2s;-webkit-tap-highlight-color:transparent}
   .xhs-card:active{transform:scale(.98);background:#FFF5F5}
   .xhs-card .xhs-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;color:#fff;font-weight:700}
   .xhs-card .xhs-info{flex:1;min-width:0}
@@ -450,7 +450,8 @@ const DATA = {
         {
           title: "{{池袋駅|池袋}} 坐**丸之内线**到 {銀座駅|銀座駅}}",
           note: "⏰ 银座不够时间可以不去",
-          spots: [🏔️ 目标店铺："Ginza Itoya", "三越百货"]
+          note: "🏔️ 目标店铺：始祖鸟 Arc'teryx · MontBell",
+          spots: ["Ginza Itoya", "三越百货"]
         },
         {
           time: "20:00ish",
@@ -547,7 +548,7 @@ function parseCards(t) {
       ? "openXhs('" + safeTitle + "','" + safeUrl + "')"
       : "window.open('" + safeUrl + "','_blank')";
     return '<div class="xhs-card" onclick="' + action + '">'
-      + '<div class="xhs-icon" style="background:linear-gradient(135deg,' + src.color + ',' + src.color + 'cc)">' + src.icon + '</div>'
+      + '<div class="xhs-icon">' + (src.logo ? '<img src="' + src.logo + '" style="width:100%;height:100%;border-radius:8px;object-fit:cover">' : '<div style="width:100%;height:100%;border-radius:8px;background:linear-gradient(135deg,' + src.color + ',' + src.color + 'cc);display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff">' + src.icon + '</div>') + '</div>'
       + '<div class="xhs-info"><div class="xhs-title">' + title + '</div><div class="xhs-source">' + src.name + ' \u00b7 \u70b9\u51fb\u67e5\u770b</div></div>'
       + '<span class="xhs-arrow">\u203a</span></div>';
   });
@@ -567,7 +568,7 @@ function md(t){
 
 // 识别链接来源
 function getLinkSource(url) {
-  if (/xiaohongshu\.com|xhslink\.com/i.test(url)) return {icon:'📕', name:'小红书笔记', color:'#FF4458'};
+  if (/xiaohongshu\.com|xhslink\.com|xhslink\.cn/i.test(url)) return {icon:'📕', name:'小红书笔记', color:'#FF2442', logo:'https://img.icons8.com/color/96/xiaohongshu.png'};
   if (/douyin\.com/i.test(url)) return {icon:'🎵', name:'抖音', color:'#111'};
   if (/bilibili\.com|b23\.tv/i.test(url)) return {icon:'📺', name:'B站视频', color:'#FB7299'};
   if (/youtube\.com|youtu\.be/i.test(url)) return {icon:'▶️', name:'YouTube', color:'#FF0000'};
@@ -591,7 +592,7 @@ function mdDetail(t){
         const url = inner.substring(sep + 1);
         const src = getLinkSource(url);
         return '<a class="xhs-card" href="' + url + '" target="_blank" rel="noopener">'
-          + '<div class="xhs-icon" style="background:linear-gradient(135deg,' + src.color + ',' + src.color + 'cc)">' + src.icon + '</div>'
+          + '<div class="xhs-icon">' + (src.logo ? '<img src="' + src.logo + '" style="width:100%;height:100%;border-radius:8px;object-fit:cover">' : '<div style="width:100%;height:100%;border-radius:8px;background:linear-gradient(135deg,' + src.color + ',' + src.color + 'cc);display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff">' + src.icon + '</div>') + '</div>'
           + '<div class="xhs-info"><div class="xhs-title">' + title + '</div><div class="xhs-source">' + src.name + ' · 点击查看</div></div>'
           + '<span class="xhs-arrow">›</span></a>';
       });
