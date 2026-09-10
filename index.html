@@ -28,7 +28,7 @@
   .checklist li:last-child{border-bottom:none}
   .checklist li::before{content:'☐';font-size:1em;flex-shrink:0}
   .checklist li.checked::before{content:'☑';color:#5BA37A}
-  .checklist a{color:#4A90D9;text-decoration:none;border-bottom:1px dotted #4A90D9;white-space:nowrap}
+  .checklist a{color:#4A90D9;text-decoration:none;border-bottom:1px dotted #4A90D9;display:inline}
 
   /* Day Nav - 手机优化 */
   .day-nav{display:flex;gap:6px;justify-content:center;padding:10px 8px;position:sticky;top:0;z-index:100;background:rgba(250,250,248,.92);backdrop-filter:blur(12px);max-width:832px;margin:0 auto;flex-wrap:wrap}
@@ -290,26 +290,26 @@ const DATA = {
           time: "08:15ish",
           icon: "⛩️",
           title: "步行到{{明治神宫|Meiji Jingu Shrine Tokyo}}（往参宮橋駅东口方向走）",
-          note: "⛩️ 明治神宫建于1920年，是东京最重要的神社之一，供奉明治天皇与昭宪皇太后。\n@@ 一条丰富耐玩环涩谷游线|https://xhslink.cn/o/2gum7bhfgal@@"
+          note: "⛩️ **明治神宫**建于1920年，是东京最重要的神社之一，供奉明治天皇与昭宪皇太后。\n@@ 一条丰富耐玩环涩谷游线|https://xhslink.cn/o/2gum7bhfgal@@"
         },
         {
           time: "10:00",
           title: " {{参宮橋駅|参宮橋駅}} 坐 **Odakyu线** 到 {{下北沢駅|下北沢駅}} 东口",
-          note: "下北泽是东京最具文艺气息和复古潮流的街区之一/ 1. **Bear Pond Espresso**：下北泽非常有名的咖啡店，Dirty 是他们的招牌/ 2. **Flipper's**：下北泽很火的松饼店，夏季新品葡萄松饼很受欢迎，奶油和汽水味冰淇淋搭配松软的饼子，适合喜欢甜品的人",
-          food: "🍛 午餐选项（如果选择在下北泽吃——汤咖喱聚集地）｜1. {{202 Curry Dou|202 Curry Dou Shimokitazawa}}（汤咖喱）/ 2. {{【⭐优先】 Rojiura Curry SAMURAI|Rojiura Curry SAMURAI Shimokitazawa}}（汤咖喱）/ 3. {{soupcurry&dining ELVIS（エルビス）|soupcurry&dining ELVIS(エルビス)}} （汤咖喱）/ 4. {{Ponipirika|スープカレー ポニピリカ 下北沢店}}（汤咖喱）"
+          note: "下北泽是东京最具文艺气息和复古潮流的街区之一 / 1. **Bear Pond Espresso**：下北泽非常有名的咖啡店，Dirty 是他们的招牌 / 2. **Flipper's**：下北泽很火的松饼店，夏季新品葡萄松饼很受欢迎，奶油和汽水味冰淇淋搭配松软的饼子，适合喜欢甜品的人",
+          food: "🍛 午餐选项（如果选择在下北泽吃——汤咖喱聚集地）｜1. {{202 Curry Dou|202 Curry Dou Shimokitazawa}}（汤咖喱） / 2. {{【⭐优先】 Rojiura Curry SAMURAI|Rojiura Curry SAMURAI Shimokitazawa}}（汤咖喱） / 3. {{soupcurry&dining ELVIS（エルビス）|soupcurry&dining ELVIS(エルビス)}} （汤咖喱） / 4. {{Ponipirika|スープカレー ポニピリカ 下北沢店}}（汤咖喱）"
         },
         {
           time: "11:00",
           title: "**下北沢駅** 坐 **Odakyu线** 到 {{表参道駅|表参道駅}} ，往 **{{原宿駅|Harajuku Station}}** 方向走",
           note: "@@东京购物｜涩谷-原宿-表参道不回头完美路线|https://xhslink.cn/o/2sfKQNDWbCl@@",
-          food: "🍽️ 午餐选项（如果选择在表参道吃）｜1. {{とんかつ まい泉 青山本店|Maisen Tonkatsu Aoyama Honten}}（炸猪排）/ 2. {{【优先】大野烤牛肉|Ohno Roast Beef Harajuku}}（原宿店）",
-          desert: " 🍰 甜点｜ 1. {{i2 Cafe|i2 Cafe Omotesando}}（火腿松饼·冰淇淋吐司）/ 2. {{HARBS|HARBS Shibuya Sakura Stage}}（蛋糕）"
+          food: "🍽️ 午餐选项（如果选择在表参道吃）｜1. {{とんかつ まい泉 青山本店|Maisen Tonkatsu Aoyama Honten}}（炸猪排） / 2. {{【优先】大野烤牛肉|Ohno Roast Beef Harajuku}}（原宿店）",
+          desert: " 🍰 甜点｜ 1. {{i2 Cafe|i2 Cafe Omotesando}}（火腿松饼·冰淇淋吐司） / 2. {{HARBS|HARBS Shibuya Sakura Stage}}（蛋糕）"
         },
         {
           title: "🛍️ **再往{{涩谷駅|渋谷駅}} 方向走，涩谷逛街**",
           spots: ["Kiddy Land", "Parco", "HANDS", "LOFT", "涩谷SKY"],
           note: "1. {{涩谷SKY|Shibuya Sky}} 1楼：人生布丁「治一郎布丁」🍮 / 2. 涩谷SKY 14楼：鸠居堂金箔御守 ✨",
-          food: "🍖 晚餐选项（涩谷）｜1. {{房総ホルモン 渋谷本店|Boso Horumon Shibuya}}（烤肉店）/ 2. {{【⭐优先】寿司 魚がし日本一 渋谷道玄坂店|Uogashi Nihon-ichi Shibuya Dogenzaka}}🍣 / 3. {{Bakumatsu Curry|幕末カリー}}（「世界第一好吃的咖喱」，素菜馆 🌱）"
+          food: "🍖 晚餐选项（涩谷）｜1. {{房総ホルモン 渋谷本店|Boso Horumon Shibuya}}（烤肉店） / 2. {{【⭐优先】寿司 魚がし日本一 渋谷道玄坂店|Uogashi Nihon-ichi Shibuya Dogenzaka}}🍣 / 3. {{Bakumatsu Curry|幕末カリー}}（「世界第一好吃的咖喱」，素菜馆 🌱）"
         },
         {
           title: "📸 打卡 {{涩谷十字路口|Shibuya Scramble Crossing}} — {{忠犬八公雕塑|Hachiko Statue Shibuya}} 🐕"
@@ -334,7 +334,7 @@ const DATA = {
         {
           time: "06:45",
           icon: "🌅",
-          title: " **Gotanda Station（五反田駅）** 坐 **浅草线** 到 **浅草站**，步行5分钟到{{浅草寺|Senso-ji Temple Tokyo}}"
+          title: " **Gotanda Station（五反田駅）** 坐 **浅草线** 到 {{浅草駅|浅草站}}，步行5分钟到{{浅草寺|Senso-ji Temple Tokyo}}"
         },
         {
           time: "07:30",
@@ -342,27 +342,27 @@ const DATA = {
           title: "{{浅草寺|Senso-ji Temple Tokyo}} → {{仲见世商店街|Nakamise Shopping Street}} → {{浅草西参道商业街|Asakusa Nishi-Sando Shotengai}}",
           note: "@@浅草寺逛街攻略|https://xhslink.cn/o/1xOIdvf2vBG@@",
           food: "🍙 早餐｜{{Misojyu|Misojyu Asakusa}} 饭团（8点开门）",
-          desert: " 🍰 小食｜ 1. {{浅草苺座 本店|Asakusa Ichigoza}}（草莓大福 草莓奶昔）/ 2. {{浅草うなな|浅草うなな Asakusa Unana 国産鰻焼おにぎり}}（鳗鱼饭团）"
+          desert: " 🍰 小食｜ 1. {{浅草苺座 本店|Asakusa Ichigoza}}（草莓大福 草莓奶昔） / 2. {{浅草うなな|浅草うなな Asakusa Unana 国産鰻焼おにぎり}}（鳗鱼饭团）"
         },
         {
           time: "10:00",
           icon: "🏛️",
           title: "步行30分钟到{{东京国立博物馆|Tokyo National Museum}}（9:30开门）",
-          note: "常规门票1000日元/ @@东京国立博物馆超全攻略|https://xhslink.cn/o/INfAKkLnV4@@/ @@东京国立博物馆十大镇馆之宝|https://xhslink.cn/o/7xJx4YFnRbx@@",
-          food: "🍜 午餐选项（根津）｜1. {{釜揚げうどん専門店 根津釜竹|Nezu Kamatake Udon}}（乌冬面，午餐walkin）/ 2. {{Ramen＆Bistro Crab Club|Ramen Bistro Crab Club Nezu}}（蟹肉拉面）"
+          note: "常规门票1000日元 / @@东京国立博物馆超全攻略|https://xhslink.cn/o/INfAKkLnV4@@ / @@东京国立博物馆十大镇馆之宝|https://xhslink.cn/o/7xJx4YFnRbx@@",
+          food: "🍜 午餐选项（根津）｜1. {{釜揚げうどん専門店 根津釜竹|Nezu Kamatake Udon}}（乌冬面，午餐walkin） / 2. {{Ramen＆Bistro Crab Club|Ramen Bistro Crab Club Nezu}}（蟹肉拉面）"
         },
         {
           time: "13:00",
           title: "**根津** 步行到 {{谷中银座|Yanaka Ginza Shopping Street}} 🏘️",
-          note: "1. {{夕焼けだんだん|Yanaka Ginza Yūyake Dandan}} （夕阳楼梯-新海诚动画《你的名字》取景地）/ 2. 谷中银座商店街：保留昭和时代下町风情的步行街，商店街内隐藏着7只木制猫咪雕塑，据说全部找到会带来好运/ @@日暮里谷中银座散步攻略|https://xhslink.cn/o/2W9EzKBqI59@@",
-          desert: " 🍰 小食｜ 1. {{Think|ベーカリー}}（面包）/ 2. {{肉之鈴木|肉のすずき}}（可乐饼，创业百年）"
+          note: "1. {{夕焼けだんだん|Yanaka Ginza Yūyake Dandan}} （夕阳楼梯-新海诚动画《你的名字》取景地） / 2. 谷中银座商店街：保留昭和时代下町风情的步行街，商店街内隐藏着7只木制猫咪雕塑，据说全部找到会带来好运 / @@日暮里谷中银座散步攻略|https://xhslink.cn/o/2W9EzKBqI59@@",
+          desert: " 🍰 小食｜ 1. {{Think|ベーカリー}}（面包） / 2. {{肉之鈴木|肉のすずき}}（可乐饼，创业百年）"
         },
         {
           time: "16:00",
           icon: "🗼",
           title: "从{{日暮里站|日暮里}} 去往{{东京晴空塔|Tokyo Skytree}}（押上站）",
-          note: "晴空塔-SKYTREE，门票现场线上买（线上有优惠）/ 1. 晴空塔楼下的 **Soramachi商场逛逛** / 2. 登顶 —「涼空の絶景」 **Chiikawa联名活动** 🐹",
-          food: "🍲 晚餐选项（晴空塔）｜1. 6楼 **スギモト**（寿喜烧）/ 2. 6楼 **回転寿しトリトン** 🍣 / 3. {{麺屋 木ノ下|Menya Kinoshita Tokyo}}（拉面，不在晴空塔里）🍜"
+          note: "晴空塔-SKYTREE，门票现场线上买（线上有优惠） / 1. 晴空塔楼下的 **Soramachi商场逛逛** / 2. 登顶 —「涼空の絶景」 **Chiikawa联名活动** 🐹",
+          food: "🍲 晚餐选项（晴空塔）｜1. 6楼 **スギモト**（寿喜烧） / 2. 6楼 **回転寿しトリトン** 🍣 / 3. {{麺屋 木ノ下|Menya Kinoshita Tokyo}}（拉面，不在晴空塔里）🍜"
         },
         {
           title: "去往**{{秋叶原站|秋葉原電気街}}**（电器街出口）",
@@ -392,25 +392,25 @@ const DATA = {
           time: "08:50",
           icon: "🐱",
           title: "{{豪德寺|Gotokuji Temple Tokyo}} — 招福殿 🐾",
-          note: "相传在江户时代初期，彦根藩主井伊直孝在鹰猎归途中经过豪德寺，因看到一只白猫在门前向他手招而进寺避雨，随后寺外便雷雨大作，使他幸运地避开了雷击和暴雨。为了报答这只灵猫的救命与招福之恩，井伊家将豪德寺定为家族的菩提寺，使其香火逐渐兴旺。此后，寺内便建造了招猫殿来供奉招猫观音，并将那只右手上举、不持小判金币的白猫形象流传下来，成为了招福猫的重要发源地。在招福猫殿前，有一尊招福猫的青铜雕像，下面的石碑上刻有「招福猫児（まねぎねこ）」的字样。所以准确来说，豪德寺的猫猫并不只是招财猫，而是招福纳福的招福猫🐈/ 🐱商店街盡頭即為豪德寺站，入口處有招财猫像，人工服務站也有招财猫裝飾可以打卡/ @@東京世田谷篇|https://xhslink.cn/o/6xHSxacRVcD@@",
-          food: "🐟 小食｜1. {{RARASAND|RARASAND Gotokuji}} 招财猫鲷鱼烧🐱/ 2. {{まほろ堂 蒼月|Mahorodou Sougetsu}} 抹茶🍵 和菓子"
+          note: "相传在江户时代初期，彦根藩主井伊直孝在鹰猎归途中经过豪德寺，因看到一只白猫在门前向他手招而进寺避雨，随后寺外便雷雨大作，使他幸运地避开了雷击和暴雨。为了报答这只灵猫的救命与招福之恩，井伊家将豪德寺定为家族的菩提寺，使其香火逐渐兴旺。此后，寺内便建造了招猫殿来供奉招猫观音，并将那只**右手上举、不持小判金币的白猫**形象流传下来，成为了招福猫的重要发源地。在招福猫殿前，有一尊招福猫的青铜雕像，下面的石碑上刻有「招福猫児（まねぎねこ）」的字样。所以准确来说，豪德寺的猫猫并不只是招财猫，而是招福纳福的招福猫🐈 / 🐱商店街盡頭即為豪德寺站，入口處有招财猫像，人工服務站也有招财猫裝飾可以打卡 / @@東京世田谷篇|https://xhslink.cn/o/6xHSxacRVcD@@",
+          food: "🐟 小食｜1. {{RARASAND|RARASAND Gotokuji}} 招财猫鲷鱼烧🐱 / 2. {{まほろ堂 蒼月|Mahorodou Sougetsu}} 抹茶🍵 和菓子"
         },
         {
           time: "11:00",
           icon: "🍣",
           title: "午餐已预约 - 11:00 {{梅丘 寿司の美登利 総本店|Midori Sushi Umegaoka Honten}}",
-          note: "预约平台：TableCheck/ 预约代码：JVGXNM/ 🍣订单内容◆时令主厨的主厨料理握寿司（含税4,180日元）× 2"
+          note: "预约平台：TableCheck / 预约代码：JVGXNM / 订单内容◆时令主厨的主厨料理握寿司（含税4,180日元）× 2🍣"
         },
         {
           title: "去往**三轩茶屋** 定位{{FamilyMart 太子堂三丁目店|ファミリーマート 太子堂三丁目店}}",
-          food: "🥖 附近美食｜{{Truffle Bakery|Truffle Bakery Sangenjaya}}（白松露面包 🍞）@@Truffle本店专程朝圣|https://xhslink.cn/o/6YFAkzjGsWH@@/ {{海街丼|Umimachi Don Sangenjaya}}（海鲜饭 🐟）"
+          food: "🥖 附近美食｜{{Truffle Bakery|Truffle Bakery Sangenjaya}}——传说木村拓哉爱吃的白松露面包 🍞 / {{海街丼|Umimachi Don Sangenjaya}}（海鲜饭 🐟） / @@Truffle本店专程朝圣|https://xhslink.cn/o/6YFAkzjGsWH@@"
         },
         {
           title: "步行至{{三轩茶屋駅|三轩茶屋駅}}，去往 {{中目黑駅|中目黑駅}}， **中目黑** → **代官山** → **惠比寿**🚶",
           spots: ["中目黑駅", "星巴克臻选®东京烘焙工坊", "旧朝倉家住宅", "代官山 蔦屋書店", "DOLCE TACUBO"],
-          note: "{{旧朝倉家住宅|Kyu Asakura House}} （门票100日元/成人）/ 位于东京代官山的旧朝仓家住宅，是一座保存完好的大正时代风格的日本传统住宅，也是东京都内少有的历经关东大地震仍不倒的宅邸。这座住宅由朝仓虎治郎于1919年建造，是典型的和风建筑，展示了日本传统的木结构工艺和庭园设计。旧朝仓家住宅完美体现了大正时代的和洋折衷建筑风格，融合了传统的日式设计和西洋元素。它的庭园巧妙地利用了自然地形，依坡而建，形成了独特的层次感和立体感。增加了庭园的景深和视觉效果，贴近自然环境。虽然是回游式庭园，却没有一般庭园必备的水池，而是回游小林。石头铺就的小路边精心种植了很多蕨类植物，映着庭中翠绿的青苔，别有一番风味，这在东京庭园中也是独一无二的。/ @@中目黑-代官山-惠比寿散步路线| https://xhslink.cn/o/4k3TkFtWQIP@@",
+          note: "{{旧朝倉家住宅|Kyu Asakura House}} （门票100日元/成人） / 位于东京代官山的旧朝仓家住宅，是一座保存完好的**大正时代风格**的日本传统住宅，也是东京都内少有的历经关东大地震仍不倒的宅邸。这座住宅由朝仓虎治郎于1919年建造，是典型的和风建筑，展示了日本传统的木结构工艺和庭园设计。旧朝仓家住宅完美体现了大正时代的和洋折衷建筑风格，融合了传统的日式设计和西洋元素。它的庭园巧妙地利用了自然地形，依坡而建，形成了独特的层次感和立体感。增加了庭园的景深和视觉效果，贴近自然环境。虽然是回游式庭园，却没有一般庭园必备的水池，而是回游小林。石头铺就的小路边精心种植了很多蕨类植物，映着庭中翠绿的青苔，别有一番风味，这在东京庭园中也是独一无二的。 / @@中目黑-代官山-惠比寿散步路线| https://xhslink.cn/o/4k3TkFtWQIP@@",
           food: "☕ 下午茶｜{{星巴克臻选®东京烘焙工坊|Starbucks Reserve® Roastery Tokyo}}/ {{Sidewalk Stand|Sidewalk Stand Nakameguro}}（咖啡·吐司·三明治）/ {{DOLCE TACUBO|DOLCE TACUBO}}（咖啡）",
-          food: "🍜 晚餐选项（惠比寿）｜1. {{親鶏中華そば 綾川 本店|Oyatori Chuka Soba Ayakawa Ebisu}}（鸡汤拉面 🍜）/ 2. {{ドン·デ·ラ·ナチュし|https://maps.app.goo.gl/ScZM1QnPXFmpcpvk7}}（黄油牡蛎·炸猪排）"
+          food: "🍜 晚餐选项（惠比寿）｜1. {{親鶏中華そば 綾川 本店|Oyatori Chuka Soba Ayakawa Ebisu}}（鸡汤拉面 🍜） / 2. {{ドン·デ·ラ·ナチュし|https://maps.app.goo.gl/ScZM1QnPXFmpcpvk7}}（黄油牡蛎·炸猪排）"
         }
       ]
     },
@@ -434,7 +434,7 @@ const DATA = {
         {
           time: "10:00",
           icon: "🛍️",
-          title: "去往  {{池袋站西口|池袋站西口}}，{东武百货|Tobu Department Store Ikebukuro}}（10:00 开门）",
+          title: "去往  {{池袋站西口|池袋站西口}}，{{东武百货|Tobu Department Store Ikebukuro}}（10:00 开门）",
           note: "🏔️ 目标店铺：始祖鸟 Arc'teryx · MontBell"
         },
         {
@@ -448,7 +448,7 @@ const DATA = {
           note: "🎰 Sunshine City 3楼：世界最大的扭蛋店！"
         },
         {
-          title: "{{池袋駅|池袋}} 坐**丸之内线**到 {銀座駅|銀座駅}}",
+          title: "{{池袋駅|池袋}} 坐**丸之内线**到 {{銀座駅|銀座駅}}",
           note: "⏰ 银座不够时间可以不去",
           note: "🏔️ 目标店铺：始祖鸟 Arc'teryx · MontBell",
           spots: ["Ginza Itoya", "三越百货"]
@@ -456,7 +456,7 @@ const DATA = {
         {
           time: "20:00ish",
           icon: "🏃‍♀️",
-          title: "{銀座駅|銀座駅}}回{{三井花园饭店五反田|三井ガーデンホテル五反田}}取行李 🧳，从品川站坐京急机场快线 15-20分钟直达羽田机场第3航站楼站"
+          title: "{{銀座駅|銀座駅}}回{{三井花园饭店五反田|三井ガーデンホテル五反田}}取行李 🧳，从{{品川駅|Shinagawa Station}}坐**京急机场快线** 15-20分钟直达**羽田机场第3航站楼站**"
         },
         {
           time: "22:30",
@@ -548,7 +548,7 @@ function parseCards(t) {
       ? "openXhs('" + safeTitle + "','" + safeUrl + "')"
       : "window.open('" + safeUrl + "','_blank')";
     return '<div class="xhs-card" onclick="' + action + '">'
-      + '<div class="xhs-icon">' + (src.logo ? '<img src="' + src.logo + '" style="width:100%;height:100%;border-radius:8px;object-fit:cover">' : '<div style="width:100%;height:100%;border-radius:8px;background:linear-gradient(135deg,' + src.color + ',' + src.color + 'cc);display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff">' + src.icon + '</div>') + '</div>'
+      + '<div class="xhs-icon" style="background:linear-gradient(135deg,' + src.color + ',' + src.color + 'cc)">' + src.icon + '</div>'
       + '<div class="xhs-info"><div class="xhs-title">' + title + '</div><div class="xhs-source">' + src.name + ' \u00b7 \u70b9\u51fb\u67e5\u770b</div></div>'
       + '<span class="xhs-arrow">\u203a</span></div>';
   });
@@ -568,7 +568,7 @@ function md(t){
 
 // 识别链接来源
 function getLinkSource(url) {
-  if (/xiaohongshu\.com|xhslink\.com|xhslink\.cn/i.test(url)) return {icon:'📕', name:'小红书笔记', color:'#FF2442', logo:'https://img.icons8.com/color/96/xiaohongshu.png'};
+  if (/xiaohongshu\.com|xhslink\.com|xhslink\.cn/i.test(url)) return {icon:'📕', name:'小红书笔记', color:'#FF2442'};
   if (/douyin\.com/i.test(url)) return {icon:'🎵', name:'抖音', color:'#111'};
   if (/bilibili\.com|b23\.tv/i.test(url)) return {icon:'📺', name:'B站视频', color:'#FB7299'};
   if (/youtube\.com|youtu\.be/i.test(url)) return {icon:'▶️', name:'YouTube', color:'#FF0000'};
@@ -592,7 +592,7 @@ function mdDetail(t){
         const url = inner.substring(sep + 1);
         const src = getLinkSource(url);
         return '<a class="xhs-card" href="' + url + '" target="_blank" rel="noopener">'
-          + '<div class="xhs-icon">' + (src.logo ? '<img src="' + src.logo + '" style="width:100%;height:100%;border-radius:8px;object-fit:cover">' : '<div style="width:100%;height:100%;border-radius:8px;background:linear-gradient(135deg,' + src.color + ',' + src.color + 'cc);display:flex;align-items:center;justify-content:center;font-size:18px;color:#fff">' + src.icon + '</div>') + '</div>'
+          + '<div class="xhs-icon" style="background:linear-gradient(135deg,' + src.color + ',' + src.color + 'cc)">' + src.icon + '</div>'
           + '<div class="xhs-info"><div class="xhs-title">' + title + '</div><div class="xhs-source">' + src.name + ' · 点击查看</div></div>'
           + '<span class="xhs-arrow">›</span></a>';
       });
@@ -634,7 +634,7 @@ function render(D){
       ['food','note','desert'].forEach(function(k){var idx=_src.indexOf('"'+k+'"');if(idx>-1)_keys.push({k:k,i:idx})});
       _keys.sort(function(a,b){return a.i-b.i});
       // 安全替换 / 为换行：保护链接里的 /
-      function safeBr(t){return t.replace(/@@(.+?)@@/g,function(m){return m.replace(/\//g,'\u2215')}).replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,function(m){return m.replace(/\//g,'\u2215')}).replace(/\//g,'<br>').replace(/\u2215/g,'/')}
+      function safeBr(t){return t.replace(/@@(.+?)@@/g,function(m){return m.replace(/\//g,'\u2215')}).replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,function(m){return m.replace(/\//g,'\u2215')}).replace(/\s\/\s/g,'<br>').replace(/\u2215/g,'/')}
       _keys.forEach(function(o){
         if(o.k==='food'&&it.food){const p=it.food.split('｜');h+=`<div class="food">${p[0]?'<div class="fl">'+p[0]+'</div>':''}${parseCards(md(safeBr(p[1]||'')))}</div>`}
         if(o.k==='note'&&it.note){h+=`<div class="note">${parseCards(md(safeBr(it.note)))}</div>`}
