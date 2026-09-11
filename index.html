@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -413,7 +413,8 @@ const DATA = {
           title: "步行至{{三轩茶屋駅|三轩茶屋駅}}，去往 {{中目黑駅|中目黑駅}}， **中目黑** → **代官山** → **惠比寿**🚶",
           spots: ["中目黑駅", "星巴克臻选®东京烘焙工坊", "旧朝倉家住宅", "代官山 蔦屋書店", "DOLCE TACUBO"],
           note: "{{旧朝倉家住宅|Kyu Asakura House}} （门票100日元/成人） / 位于东京代官山的旧朝仓家住宅，是一座保存完好的**大正时代风格**的日本传统住宅，也是东京都内少有的历经关东大地震仍不倒的宅邸。这座住宅由朝仓虎治郎于1919年建造，是典型的和风建筑，展示了日本传统的木结构工艺和庭园设计。旧朝仓家住宅完美体现了大正时代的和洋折衷建筑风格，融合了传统的日式设计和西洋元素。它的庭园巧妙地利用了自然地形，依坡而建，形成了独特的层次感和立体感。增加了庭园的景深和视觉效果，贴近自然环境。虽然是回游式庭园，却没有一般庭园必备的水池，而是回游小林。石头铺就的小路边精心种植了很多蕨类植物，映着庭中翠绿的青苔，别有一番风味，这在东京庭园中也是独一无二的。 / @@中目黑-代官山-惠比寿散步路线| https://xhslink.cn/o/4k3TkFtWQIP@@",
-          food: "☕ 下午茶｜{{星巴克臻选®东京烘焙工坊|Starbucks Reserve® Roastery Tokyo}}/ {{Sidewalk Stand|Sidewalk Stand Nakameguro}}（咖啡·吐司·三明治）/ {{DOLCE TACUBO|DOLCE TACUBO}}（咖啡） / 🍜 晚餐选项（惠比寿）｜1. {{親鶏中華そば 綾川 本店|Oyatori Chuka Soba Ayakawa Ebisu}}（鸡汤拉面 🍜） / 2. {{ドン·デ·ラ·ナチュし|https://maps.app.goo.gl/ScZM1QnPXFmpcpvk7}}（黄油牡蛎·炸猪排）"
+          food: "☕ 下午茶｜1. {{星巴克臻选®东京烘焙工坊|Starbucks Reserve® Roastery Tokyo}} / 2. {{Sidewalk Stand|Sidewalk Stand Nakameguro}}（咖啡·吐司·三明治） / 3. {{DOLCE TACUBO|DOLCE TACUBO}}（咖啡）",
+          food2: "🍜 晚餐选项（惠比寿）｜1. {{親鶏中華そば 綾川 本店|Oyatori Chuka Soba Ayakawa Ebisu}}（鸡汤拉面 🍜） / 2. {{ドン·デ·ラ·ナチュし|https://maps.app.goo.gl/ScZM1QnPXFmpcpvk7}}（黄油牡蛎·炸猪排）"
         }
       ]
     },
@@ -450,7 +451,7 @@ const DATA = {
         {
           title: "🛍️ **池袋逛街**",
           spots: ["PARCO", "Animate 池袋本店", "Sunshine City"],
-          note: "🎰 1. PARCO 7楼 / 2. Sunshine City 3楼：世界最大的扭蛋店！",
+          note: "1. PARCO 7楼 / 2. Sunshine City 3楼：世界最大的扭蛋店！",
           food: "🥖 甜点｜1. 池袋PARCO本馆b1 Habes（蛋糕）"
         },
         {
@@ -634,16 +635,16 @@ function render(D){
       // detail 内容
       if(it.detail) h+=`<div class="detail-box">${mdDetail(it.detail)}</div>`;
       if(it.spots&&it.spots.length){h+=`<div class="spots">`;it.spots.forEach((s,j)=>{if(j)h+=`<span class="ar">→</span>`;h+=`<span class="s">${s}</span>`});h+=`</div>`}
-      // 按数据里的字段顺序渲染 food/note/desert
-      var _src=JSON.stringify(it);var _keys=[];
-      ['food','note','desert'].forEach(function(k){var idx=_src.indexOf('"'+k+'"');if(idx>-1)_keys.push({k:k,i:idx})});
-      _keys.sort(function(a,b){return a.i-b.i});
-      // 安全替换 / 为换行：保护链接里的 /
+      // 按数据里的字段顺序渲染所有 food*/note*/desert* 字段
+      var _keys=[];
+      Object.keys(it).forEach(function(k){
+        if(/^(food|note|desert)\d*$/.test(k)&&it[k]){_keys.push(k)}
+      });
       function safeBr(t){return t.replace(/@@(.+?)@@/g,function(m){return m.replace(/\//g,'\u2215')}).replace(/\[([^\]]+)\]\((https?:\/\/[^)]+)\)/g,function(m){return m.replace(/\//g,'\u2215')}).replace(/\s\/\s/g,'<br>').replace(/\u2215/g,'/')}
-      _keys.forEach(function(o){
-        if(o.k==='food'&&it.food){const p=it.food.split('｜');h+=`<div class="food">${p[0]?'<div class="fl">'+p[0]+'</div>':''}${parseCards(md(safeBr(p[1]||'')))}</div>`}
-        if(o.k==='note'&&it.note){h+=`<div class="note">${parseCards(md(safeBr(it.note)))}</div>`}
-        if(o.k==='desert'&&it.desert){const p=it.desert.split('｜');h+=`<div class="food">${p[0]?'<div class="fl">'+p[0]+'</div>':''}${parseCards(md(safeBr(p[1]||'')))}</div>`}
+      _keys.forEach(function(k){
+        var val=it[k];
+        if(/^(food|desert)\d*$/.test(k)){const p=val.split('\uff5c');h+=`<div class="food">${p[0]?'<div class="fl">'+p[0]+'</div>':''}${parseCards(md(safeBr(p[1]||'')))}</div>`}
+        else if(/^note\d*$/.test(k)){h+=`<div class="note">${parseCards(md(safeBr(val)))}</div>`}
       });
       h+=`</div></div>`;
     });
